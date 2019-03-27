@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'sendEmail.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = [
+UAPOOL = [
     "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",
     "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)",
     "Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)",
@@ -27,11 +27,11 @@ USER_AGENT = [
     "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5"
 ]
 
-PROXIES = [
-    {'ip_port': '58.243.56.148:8060', 'user_pass': ''},
-    {'ip_port': '27.188.62.55:8060', 'user_pass': ''},
-    {'ip_port': '117.184.67.118:8060', 'user_pass': ''},
-    {'ip_port': '60.249.176.76:8080', 'user_pass': ''},
+IPPOOL = [
+    {'ipaddr': '58.243.56.148:8060',},
+    {'ipaddr': '27.188.62.55:8060',},
+    {'ipaddr': '117.184.67.118:8060', },
+    {'ipaddr': '60.249.176.76:8080',}
 ]
 
 # Obey robots.txt rules
@@ -71,8 +71,12 @@ COOKIES_ENABLED = False
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'sendEmail.middlewares.SendemailDownloaderMiddleware': 543,
-    'sendEmail.middlewares.RandomUserAgent': 1,
-    'sendEmail.middlewares.ProxyMiddleware': 100
+    # 'sendEmail.middlewares.RandomUserAgent': 1,
+    # 'sendEmail.middlewares.ProxyMiddleware': 100,
+    'sendEmail.middlewares.IPPOOLS': 125,
+    'sendEmail.middlewares.Uamid': 127,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 123,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 126,
 }
 
 # Enable or disable extensions
